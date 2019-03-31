@@ -100,6 +100,9 @@
  // Function to refresh the display
  function refresh() {
 
+   dataDump = database.getChildren();
+   console.log(dataDump);
+
    clearInterval(intervalID);
    location.reload();
  }

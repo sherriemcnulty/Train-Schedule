@@ -59,27 +59,22 @@
 
    // Get current time
    var currentTime = moment();
-   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
 
    // Push first time back 1 year to make sure it comes before current time
    var firstTimeConverted = moment(tFirstTime, "HH:mm").subtract(1, "years");
-   console.log("FIRST TIME: " + moment(firstTimeConverted).format("hh:mm"));
 
    // Difference between the times
    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-   console.log("DIFFERENCE IN TIME: " + moment(diffTime).format("HH:MM"));
 
-   // Time apart (remainder)
+   // Time apart
    var tRemainder = diffTime % tFrequency;
-   console.log(tRemainder);
 
-   // Minute(s) Until Train
+   // Minute(s) until the next train
    var tMinutesTillTrain = tFrequency - tRemainder;
-   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
    // Next Train
    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
    // Create the new row
    var newRow = $("<tr>").append(
@@ -99,9 +94,6 @@
 
  // Function to refresh the display
  function refresh() {
-
-   dataDump = database.getChildren();
-   console.log(dataDump);
 
    clearInterval(intervalID);
    location.reload();

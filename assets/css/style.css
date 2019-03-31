@@ -24,3 +24,18 @@
       display: inline-block;
       width: 20%;
  }
+
+ @media screen and (max-width: 640px) {
+      body {
+           font-size: small;
+      }
+
+      h1 {
+           font-size: normal;
+      }
+
+      .row {
+           margin-left: 0;
+           margin-right: 0;
+      }
+ }

@@ -1,5 +1,26 @@
+ html,
+ body {
+      margin: 0;
+      font-family: 'Arial',
+           'Helvetica Neue',
+           Helvetica,
+           sans-serif;
+      background-color: tan;
+      background: url("../../assets/images/background.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: black;
+ }
+
+ form,
+ .jumbotron,
+ .card {
+      /* background: rgba(95, 70, 51, 0.9); */
+      background: rgba(245, 245, 245, 0.9);
+ }
+
  #train-table th,
  td {
       display: inline-block;
-      width: 16.575%;
+      width: 20%;
  }

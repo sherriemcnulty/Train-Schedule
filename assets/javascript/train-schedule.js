@@ -1,5 +1,8 @@
  "use strict;"
 
+ // Global variable used to refresh display every 60 sec
+ var intervalID = -1;
+
  // Initialize Firebase
  var config = {
    apiKey: "AIzaSyAm2RSNolPA0-tTI2r6TgdzDjm-WOZzFcg",
@@ -10,8 +13,9 @@
    messagingSenderId: "880747413210"
  };
  firebase.initializeApp(config);
-
  var database = firebase.database();
+
+ // CLICK EVENT: Grab input & store in database
 
  $("#add-train-btn").on("click", function (event) {
    event.preventDefault();
@@ -19,70 +23,83 @@
    // Grab user input
    var trainName = $("#train-name-input").val().trim();
    var destination = $("#destination-input").val().trim();
-   var firstTrain = $("#first-train-input").val().trim();
+   var firstTime = $("#first-input").val().trim();
    var frequency = $("#frequency-input").val().trim();
 
-   console.log("trainName: " + trainName);
-   console.log("destination: " + destination);
-   console.log("firstTrain: " + firstTrain);
-   console.log("frequency: " + frequency);
-
-   // Creates local "temporary" object for holding train data
+   // Create local "temporary" object for holding train data
    var newTrain = {
      trainName: trainName,
      destination: destination,
-     firstTrain: firstTrain,
+     firstTime: firstTime,
      frequency: frequency
    };
-
-   // Logs everything to console
-   console.log("newTrain.trainName: " + newTrain.trainName);
-   console.log("newTrain.destination: " + newTrain.destination);
-   console.log("newTrain.firstTrain: " + newTrain.firstTrain);
-   console.log("newTrain.frequency: " + newTrain.frequency);
 
    // Upload train data to the database
    database.ref().push(newTrain);
 
    alert("Train successfully added");
 
-   // Clears all of the text-boxes
+   // Clear all of the input text-boxes
    $("#train-name-input").val("");
    $("#destination-input").val("");
-   $("#first-train-input").val("");
+   $("#first-input").val("");
    $("#frequency-input").val("");
  });
 
- // Create Firebase event for adding newTrain to the database and a row in the html when a user adds an entry
+ // FIREBASE EVENT: When new train info is submitted, 
+ // get a snapshot and add it to the table
+
  database.ref().on("child_added", function (childSnapshot) {
-   console.log(childSnapshot.val());
 
    // Store everything into a variable.
-   var trainName = childSnapshot.val().trainName;
-   var destination = childSnapshot.val().destination;
-   var firstTrain = childSnapshot.val().firstTrain;
-   var frequency = childSnapshot.val().frequency;
+   var tTrain = childSnapshot.val().trainName;
+   var tFirstTime = childSnapshot.val().firstTime;
+   var tDestination = childSnapshot.val().destination;
+   var tFrequency = childSnapshot.val().frequency;
 
-   // Employee Info
-   console.log(trainName);
-   console.log(destination);
-   console.log(firstTrain);
-   console.log(frequency);
+   // Get current time
+   var currentTime = moment();
+   console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-   // calculate next time & minutes away
-   var nextTrain = firstTrain;
-   var minutesAway = firstTrain;
+   // Push first time back 1 year to make sure it comes before current time
+   var firstTimeConverted = moment(tFirstTime, "HH:mm").subtract(1, "years");
+   console.log("FIRST TIME: " + moment(firstTimeConverted).format("hh:mm"));
+
+   // Difference between the times
+   var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+   console.log("DIFFERENCE IN TIME: " + moment(diffTime).format("HH:MM"));
+
+   // Time apart (remainder)
+   var tRemainder = diffTime % tFrequency;
+   console.log(tRemainder);
+
+   // Minute(s) Until Train
+   var tMinutesTillTrain = tFrequency - tRemainder;
+   console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+   // Next Train
+   var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+   console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
    // Create the new row
-
    var newRow = $("<tr>").append(
-     $("<td>").text(trainName),
-     $("<td>").text(destination),
-     $("<td>").text(frequency),
-     $("<td>").text(nextTrain),
-     $("<td>").text(minutesAway)
+     $('<td scope="col">').text(tTrain),
+     $('<td scope="col">').text(tDestination),
+     $('<td scope="col">').text(tFrequency),
+     $('<td scope="col">').text(moment(nextTrain).format("LT")),
+     $('<td scope="col">').text(tMinutesTillTrain)
    );
 
    // Append the new row to the table
    $("#train-table > tbody").append(newRow);
+
+   // refresh the screen every minute
+   intervalID = setInterval(refresh, 60000);
  });
+
+ // Function to refresh the display
+ function refresh() {
+
+   clearInterval(intervalID);
+   location.reload();
+ }

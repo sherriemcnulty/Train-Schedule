@@ -26,24 +26,35 @@
    var firstTime = $("#first-input").val().trim();
    var frequency = $("#frequency-input").val().trim();
 
-   // Create local "temporary" object for holding train data
-   var newTrain = {
-     trainName: trainName,
-     destination: destination,
-     firstTime: firstTime,
-     frequency: frequency
-   };
+   if ((trainName === null) || (trainName === "") ||
+     (destination === null) || (destination === "") ||
+     (firstTime == null) || (firstTime === "") ||
+     (frequency == null) || (frequency === "")) {
 
-   // Upload train data to the database
-   database.ref().push(newTrain);
+     alert("All fields must be filled out before submitting.");
 
-   alert("Train successfully added");
+   } else {
 
-   // Clear all of the input text-boxes
-   $("#train-name-input").val("");
-   $("#destination-input").val("");
-   $("#first-input").val("");
-   $("#frequency-input").val("");
+     // Create local "temporary" object for holding train data
+     var newTrain = {
+       trainName: trainName,
+       destination: destination,
+       firstTime: firstTime,
+       frequency: frequency
+     };
+
+     // Upload train data to the database
+     database.ref().push(newTrain);
+
+     alert("Train successfully added");
+
+     // Clear all of the input text-boxes
+     $("#train-name-input").val("");
+     $("#destination-input").val("");
+     $("#first-input").val("");
+     $("#frequency-input").val("");
+   }
+
  });
 
  // FIREBASE EVENT: When new train info is submitted, 

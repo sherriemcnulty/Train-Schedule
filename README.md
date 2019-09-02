@@ -1,12 +1,30 @@
 # train-schedule
 
-This program is a simple train scheduler and schedule display.
+## Live Preview
+ - [Train Schedule](https://sherriemcnulty.github.io/train-schedule/)
 
-Users can add trains to the schedule by entering data into the form at the bottom of the screen. 
+## Description
+Train Schedule allows users to add trains with their schedules into a database. It then calculates and displays their progress every 60 seconds. 
 
-When the "Submit" button is pressed the input is captured and added to the database. Then the minutes until arrival and arrival times are calculate and the train information is added to the schedule table that is displayed above the data entry form. 
+Users can:
+   - Add trains to the schedule by submitting information into the form at the bottom of the display then clicking on the "Submit" button.
+   - Track the progress of all trains in the database by watching the display or revisiting for updates. 
+   
+## Front-end
+ - jQuery
+ - Moment.js
+ - Dynamic HTML
+ - CSS3
 
-Finally, the schedule display updates at 60 second intervals showing new arrival times and minutes until the next train arrives.
+## Back-end
+  - Firebase
+  - AJAX
 
-Technologies Used:
-HTML5, CSS3, Bootstrap, jQuery, AJAX, Firebase, Moment.js
+## Deployment
+ - Github
+ 
+## Author(s)
+  - [Sherrie McNulty](https://github.com/sherriemcnulty) 
+
+## Copyright
+© Sherrie McNulty 2019

@@ -1,7 +1,10 @@
 # train-schedule
 
 ## Live Preview
- - [Train Schedule](https://sherriemcnulty.github.io/train-schedule/)
+[Train Schedule](https://sherriemcnulty.github.io/train-schedule/)
+
+## Author
+[Sherrie McNulty](https://github.com/sherriemcnulty) 
 
 ## Description
 Train Schedule allows users to add trains with their schedules into a database. It then calculates and displays their progress every 60 seconds. 
@@ -22,9 +25,6 @@ Users can:
 
 ## Deployment
  - Github
- 
-## Author
-  - [Sherrie McNulty](https://github.com/sherriemcnulty) 
 
 ## Copyright
 © Sherrie McNulty 2019

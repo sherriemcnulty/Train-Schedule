@@ -23,7 +23,7 @@ Users can:
 ## Deployment
  - Github
  
-## Author(s)
+## Author
   - [Sherrie McNulty](https://github.com/sherriemcnulty) 
 
 ## Copyright

@@ -1,26 +1,26 @@
- html,
- body {
-      margin: 0;
-      font-family: 'Arial',
-           'Helvetica Neue',
-           Helvetica,
-           sans-serif;
-      background-color: aliceblue;
-      background: url("../../assets/images/background.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-      color: black;
- }
+html,
+body {
+	margin: 0;
+	font-family: "Arial", "Helvetica Neue", Helvetica, sans-serif;
+	background-color: aliceblue;
+	background: url("../../assets/images/background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: black;
+}
 
- form,
- .jumbotron,
- .card {
-      /* background: rgba(95, 70, 51, 0.9); */
-      background: rgba(245, 245, 245, 0.9);
- }
+form,
+.jumbotron,
+.card {
+	background: rgba(245, 245, 245);
+}
 
- #train-table th,
- td {
-      display: inline-block;
-      width: 20%;
- }
+#train-table th,
+td {
+	display: inline-block;
+	width: 20%;
+}
+
+.btn {
+	border: 2px outset lightgray;
+}

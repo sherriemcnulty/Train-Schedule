@@ -16,6 +16,3 @@ Users can:
  - Moment.js
  - Firebase
  - AJAX
-
-## Deployment
- - Github
